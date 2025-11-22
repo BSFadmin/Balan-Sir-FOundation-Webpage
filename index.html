@@ -45,13 +45,14 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Shadow */
         }
 
-        /* 1. Navigation Header (Top Ribbon) */
+        /* 1. Navigation Header (Top Ribbon) - MODIFIED FOR WHITE BACKGROUND AND BORDER LINE */
         .header {
             position: sticky;
             top: 0;
             z-index: 50;
-            background-color: var(--color-primary);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff; /* Changed to white */
+            border-bottom: 1px solid #ddd; /* Simple separating line */
+            box-shadow: none; /* Removed the heavy shadow */
         }
 
         .navbar {
@@ -65,7 +66,7 @@
             flex-shrink: 0;
             font-size: 1.25rem;
             font-weight: 800;
-            color: white;
+            color: var(--color-primary); /* Changed for visibility on white background */
             letter-spacing: 0.05em;
         }
 
@@ -82,7 +83,7 @@
         }
 
         .nav-links a {
-            color: #ccc;
+            color: var(--color-primary); /* Changed for visibility on white background */
             text-decoration: none;
             font-weight: 500;
             padding: 0.5rem 0.75rem;
@@ -90,14 +91,14 @@
         }
 
         .nav-links a:hover {
-            color: white;
+            color: var(--color-secondary); /* Hover color remains prominent */
         }
 
         /* Mobile Menu Button */
         .mobile-menu-button {
             background: none;
             border: none;
-            color: white;
+            color: var(--color-primary); /* Changed for visibility on white background */
             cursor: pointer;
             padding: 0.5rem;
             border-radius: 0.375rem;
@@ -112,7 +113,9 @@
         .mobile-menu {
             display: none; /* Hidden by default */
             padding: 0.5rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid #eee; /* Light border */
+            background-color: #ffffff; /* Changed to white */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Keep shadow for mobile menu lift */
         }
 
         .mobile-menu a {
@@ -120,13 +123,13 @@
             padding: 0.75rem 1rem;
             border-radius: 0.375rem;
             text-decoration: none;
-            color: white;
+            color: var(--color-primary); /* Changed for visibility on white background */
             font-weight: 500;
             transition: background-color 0.2s;
         }
 
         .mobile-menu a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: #f3f4f6; /* Lighter hover color for white background */
         }
 
         /* Desktop specific styles */
@@ -491,10 +494,10 @@
                 <div class="about-writeup">
                     <div>
                         <p>
-                            Balan Sir was not just an educator; he was a guiding light who shaped countless lives through his wisdom, patience, and unwavering dedication. His tenure, spanning over three decades, left an indelible mark on his students, colleagues, and the community. He championed the belief that true education extends beyond textbooks—it encompasses character development, critical thinking, and empathy.
+                            Er. P Balan, our beloved Balan Sir was not just an educator; he was a guiding light who shaped countless lives through his wisdom, patience, and unwavering dedication. His tenure, spanning over three decades, in CARMEL POLYTECHNIC COLLEGE, PUNNAPRA, ALAPPUZHA, left an indelible mark on his students, colleagues, and the community. He championed the belief that true education extends beyond textbooks—it encompasses character development, critical thinking, and empathy.
                         </p>
                         <p>
-                            The Balan Sir Foundation was established by his former students to ensure his philosophy lives on. We strive to support deserving students, fund educational initiatives, and host community programs that reflect the integrity and human kindness Balan Sir embodied every day.
+                            His classroom was a crucible where curiosity met purpose, transforming countless students into not just exceptional engineers, but compassionate leaders and ethical trailblazers.
                         </p>
                         <p class="highlight">
                             We invite you to join us in celebrating his extraordinary life and contributing to the continuation of his legacy.
@@ -504,14 +507,14 @@
             </div>
         </section>
 
-        <!-- 3. About Section (Foundation's Mission) - UPDATED CONTENT -->
+        <!-- 3. About Section (Foundation's Mission) -->
         <section id="about">
             <h2>About the Foundation</h2>
             <p>
-                In loving memory of Er. P. Balan, a luminary whose unwavering dedication as Principal illuminated Carmel Polytechnic, Punnapra, Alappuzha for 28 years, the “BALAN SIR FOUNDATION” stands as a testament to his extraordinary legacy. A visionary mentor, he sculpted futures with the precision of a master educator, blending technical brilliance with profound humanity.
+                The Balan Sir Foundation was established by his former students to ensure his philosophy lives on. We strive to support deserving students, fund educational initiatives, and host community programs that reflect the integrity and human kindness Balan Sir embodied every day.
             </p>
             <p>
-                His classroom was a crucible where curiosity met purpose, transforming countless students into not just exceptional engineers, but compassionate leaders and ethical trailblazers. Through this foundation, we honor his indomitable spirit by nurturing innovation, fostering integrity, and empowering generations to carry forward his ethos of excellence, service, and boundless empathy.
+                Through this foundation, we honour his indomitable spirit by nurturing innovation, fostering integrity, and empowering generations to carry forward his ethos of excellence, service, and boundless empathy.
             </p>
             <p>
                 Here, his light lives on guiding minds, igniting dreams, and perpetuating a legacy where education transcends skill to sculpt souls.
@@ -520,25 +523,23 @@
 
         <!-- 4. Program Registration Call to Action (CTA) -->
         <section id="programs">
-            <h3>Upcoming Event: Memorial Program</h3>
+            <h3>Upcoming Event: Smaranika</h3>
             <p>
                 Join us as we gather to remember and celebrate the life of Balan Sir.
             </p>
             
             <!-- Registration Link/Button -->
             <a 
-                href="[LINK_TO_BE_PROVIDED]" 
+                href="#" 
                 target="_blank" 
                 class="cta-button"
             >
-                Register for the Memorial Program
+                Register for Smaranika
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
                 </svg>
             </a>
-            <p class="cta-note">
-                (Please replace `[LINK_TO_BE_PROVIDED]` with the actual registration link.)
-            </p>
+            <!-- Removed the cta-note asking to replace the link -->
         </section>
 
         <!-- Placeholder Sections for Navigation -->
