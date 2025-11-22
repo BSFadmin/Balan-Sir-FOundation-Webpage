@@ -149,6 +149,8 @@
         #home {
             padding-top: 4rem; 
             padding-bottom: 4rem; 
+            /* ADDED: Center alignment for H1 (will be overridden by H1 margin) and centered content for mobile */
+            text-align: center;
         }
 
         #home h1 {
@@ -159,15 +161,20 @@
             border-bottom: 2px solid var(--color-secondary);
             padding-bottom: 0.5rem;
             color: var(--color-secondary);
-            display: inline-block;
+            /* ADDED: Center the H1 block and ensure underline fits content */
+            max-width: fit-content;
+            margin: 0 auto 2rem auto;
         }
         
         /* Reused styles from old about section for the main home page content */
         .about-content {
+            /* Mobile default: Column stack */
             display: flex;
             flex-direction: column;
             gap: 2rem;
             align-items: center;
+            /* Reset to left/start alignment for the content blocks themselves */
+            text-align: left; 
         }
 
         .about-photo-card {
@@ -187,7 +194,7 @@
         }
         
         .photo-wrapper img {
-            width: 100%;
+            width: 100%; /* Image fills container width on mobile */
             height: auto;
             object-fit: cover;
             border-radius: 0.5rem;
@@ -207,6 +214,8 @@
             margin-bottom: 1.5rem;
             color: #4b5563;
             font-size: 1.125rem;
+            /* ADDED: Text Justification */
+            text-align: justify;
         }
 
         .about-writeup .highlight {
@@ -214,9 +223,14 @@
             color: #1f2937;
         }
 
-        @media (min-width: 768px) { /* md breakpoint */
+        @media (min-width: 768px) { /* Tablet/Desktop adaptation */
+            #home {
+                /* Reset alignment for the main container on desktop */
+                text-align: left;
+            }
             .about-content {
-                flex-direction: row;
+                flex-direction: row; /* Switch to horizontal layout */
+                align-items: flex-start; /* Align row items to the top */
             }
             .about-photo-card {
                 width: 33.333333%; /* 1/3 */
@@ -224,9 +238,18 @@
             .about-writeup {
                 width: 66.666667%; /* 2/3 */
             }
+            #home h1 {
+                /* On desktop, keep H1 centered but allow the content below to align left */
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
         
         /* 3. About Section (Foundation Mission) */
+        #about {
+             /* ADDED: Center content of about section */
+            text-align: center;
+        }
         #about h2 {
             font-size: 2rem;
             font-weight: 700;
@@ -234,7 +257,9 @@
             border-bottom: 2px solid var(--color-secondary);
             padding-bottom: 0.5rem;
             color: var(--color-secondary);
-            display: inline-block;
+            /* ADDED: Center the H2 block and ensure underline fits content */
+            max-width: fit-content;
+            margin: 0 auto 2rem auto;
         }
         
         #about p {
@@ -242,10 +267,15 @@
             color: #4b5563;
             margin-bottom: 1.5rem;
             max-width: 900px;
+            /* ADDED: Center paragraphs with max-width */
+            margin-left: auto;
+            margin-right: auto;
+            /* ADDED: Text Justification */
+            text-align: justify;
         }
 
-
         /* 4. CTA Section (Programs) */
+        /* This section was already centered, so no change needed to alignment */
         #programs {
             text-align: center;
             background-color: var(--color-text-dark); /* bg-gray-800 */
@@ -306,41 +336,68 @@
         }
         
         /* Placeholder Section Headers */
+        #gallery, #downloads, #contact {
+            /* ADDED: Center content of these sections */
+            text-align: center;
+        }
+
         #gallery h2, #downloads h2, #contact h2 {
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 1rem;
             color: var(--color-secondary);
+            /* ADDED: Center the H2 block and ensure underline fits content */
+            max-width: fit-content;
+            margin: 0 auto 1rem auto;
         }
 
-        /* Gallery Grid */
-        .gallery-grid {
+        /* Gallery Ribbon Styles */
+        .gallery-ribbon {
             margin-top: 1.5rem;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-        
-        @media (min-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        
-        .gallery-item {
-            height: 6rem;
-            background-color: #e5e7eb;
-            border-radius: 0.5rem;
+            /* Enable horizontal scrolling */
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6b7280;
+            overflow-x: scroll; /* Allow horizontal scrolling */
+            gap: 1rem;
+            padding: 0 0 1rem 0; /* Space for scroll padding */
+            max-width: 100%; 
+            margin-left: auto;
+            margin-right: auto;
+            -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+            border-radius: 0.5rem;
+        }
+
+        /* Hide scrollbar visually but maintain scroll functionality */
+        .gallery-ribbon::-webkit-scrollbar {
+            display: none;
+        }
+        .gallery-ribbon {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        .gallery-image {
+            /* Fixed height for the ribbon effect */
+            height: 12rem; 
+            /* Fixed width or minimum width */
+            min-width: 12rem; 
+            object-fit: cover;
+            border-radius: 0.5rem;
+            transition: transform 0.3s ease;
+            cursor: grab;
+            border: 3px solid var(--color-secondary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-image:hover {
+            transform: translateY(-5px); /* Lift slightly on hover */
         }
 
         /* Contact Section */
         #contact address {
             margin-top: 1rem;
             color: #4b5563;
+            /* ADDED: Reset font style */
+            font-style: normal;
         }
         
         #contact a {
@@ -387,6 +444,7 @@
                 </nav>
 
                 <!-- Mobile Menu Button (Hamburger Icon) -->
+                <!-- The menu button is only visible on mobile -->
                 <button id="mobile-menu-button" class="mobile-menu-button" aria-expanded="false" aria-controls="mobile-menu">
                     <svg class="mobile-menu-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -395,7 +453,7 @@
             </div>
         </div>
 
-        <!-- Mobile Menu (Collapsed by default) -->
+        <!-- Mobile Menu (Collapsed by default, shown by JavaScript) -->
         <div class="mobile-menu" id="mobile-menu">
             <div class="container">
                 <a href="#home">Home</a>
@@ -410,7 +468,7 @@
 
     <main class="container">
 
-        <!-- 2. Home Section (Now contains the Tribute and Photo) -->
+        <!-- 2. Home Section (Tribute and Photo) -->
         <section id="home">
             <h1>Remembering Balan Sir</h1>
             <div class="about-content">
@@ -418,9 +476,8 @@
                 <!-- Photo Card (Left/Top) -->
                 <div class="about-photo-card">
                     <div class="photo-wrapper">
-                        <!-- Placeholder Image for Balan Sir's Photo -->
                         <img 
-                            src="https://placehold.co/400x400/374151/ffffff?text=Balan+Sir+Photo" 
+                            src="Photo1.jpeg" 
                             alt="A photograph of Balan Sir" 
                             onerror="this.onerror=null; this.src='https://placehold.co/400x400/374151/ffffff?text=Image+Unavailable';"
                         >
@@ -437,7 +494,7 @@
                             Balan Sir was not just an educator; he was a guiding light who shaped countless lives through his wisdom, patience, and unwavering dedication. His tenure, spanning over three decades, left an indelible mark on his students, colleagues, and the community. He championed the belief that true education extends beyond textbooks—it encompasses character development, critical thinking, and empathy.
                         </p>
                         <p>
-                            His passion for literature (or insert actual subject) was infectious, transforming difficult subjects into fascinating explorations. The Balan Sir Foundation was established by his former students to ensure his philosophy lives on. We strive to support deserving students, fund educational initiatives, and host community programs that reflect the integrity and human kindness Balan Sir embodied every day.
+                            The Balan Sir Foundation was established by his former students to ensure his philosophy lives on. We strive to support deserving students, fund educational initiatives, and host community programs that reflect the integrity and human kindness Balan Sir embodied every day.
                         </p>
                         <p class="highlight">
                             We invite you to join us in celebrating his extraordinary life and contributing to the continuation of his legacy.
@@ -447,17 +504,17 @@
             </div>
         </section>
 
-        <!-- 3. About Section (Now contains the Foundation's Mission) -->
+        <!-- 3. About Section (Foundation's Mission) - UPDATED CONTENT -->
         <section id="about">
             <h2>About the Foundation</h2>
             <p>
-                The Balan Sir Foundation was officially established in [Year Placeholder] by a group of his former students and devoted colleagues with a singular vision: to perpetuate the humanitarian and educational ideals of Balan Sir. We operate as a registered non-profit organization dedicated to fostering excellence in education and community service.
+                In loving memory of Er. P. Balan, a luminary whose unwavering dedication as Principal illuminated Carmel Polytechnic, Punnapra, Alappuzha for 28 years, the **“P BALAN FOUNDATION”** stands as a testament to his extraordinary legacy. A visionary mentor, he sculpted futures with the precision of a master educator, blending technical brilliance with profound humanity.
             </p>
             <p>
-                Our core mission is two-fold: <span class="highlight">Scholarship and Outreach</span>. We provide financial aid and mentorship to students from underserved backgrounds who demonstrate academic promise and strong ethical character—qualities Balan Sir valued most. Furthermore, we run community outreach programs that promote literacy, digital inclusion, and environmental stewardship, echoing his lifelong commitment to holistic development.
+                His classroom was a crucible where curiosity met purpose, transforming countless students into not just exceptional engineers, but compassionate leaders and ethical trailblazers. Through this foundation, we honor his indomitable spirit by nurturing innovation, fostering integrity, and empowering generations to carry forward his ethos of excellence, service, and boundless empathy.
             </p>
             <p>
-                We believe that by investing in the next generation, we honor the legacy of Balan Sir and ensure his positive influence continues to spread far and wide.
+                Here, his light lives on guiding minds, igniting dreams, and perpetuating a legacy where education transcends skill to sculpt souls.
             </p>
         </section>
 
@@ -488,11 +545,15 @@
         <section id="gallery">
             <h2>Gallery</h2>
             <p>This section will host cherished photos and videos from Balan Sir's life and our foundation events.</p>
-            <div class="gallery-grid">
-                <div class="gallery-item">Photo 1</div>
-                <div class="gallery-item">Photo 2</div>
-                <div class="gallery-item">Photo 3</div>
-                <div class="gallery-item">Photo 4</div>
+            
+            <!-- Horizontal Scrolling Photo Ribbon -->
+            <div class="gallery-ribbon">
+                <img src="g1.jpeg" alt="Gallery Photo 1" onerror="this.onerror=null; this.src='https://placehold.co/200x200/4a5568/ffffff?text=G1';" class="gallery-image">
+                <img src="g2.jpeg" alt="Gallery Photo 2" onerror="this.onerror=null; this.src='https://placehold.co/200x200/4a5568/ffffff?text=G2';" class="gallery-image">
+                <img src="g3.jpeg" alt="Gallery Photo 3" onerror="this.onerror=null; this.src='https://placehold.co/200x200/4a5568/ffffff?text=G3';" class="gallery-image">
+                <img src="g4.jpeg" alt="Gallery Photo 4" onerror="this.onerror=null; this.src='https://placehold.co/200x200/4a5568/ffffff?text=G4';" class="gallery-image">
+                <img src="g5.jpeg" alt="Gallery Photo 5" onerror="this.onerror=null; this.src='https://placehold.co/200x200/4a5568/ffffff?text=G5';" class="gallery-image">
+                <img src="g6.jpeg" alt="Gallery Photo 6" onerror="this.onerror=null; this.src='https://placehold.co/200x200/4a5568/ffffff?text=G6';" class="gallery-image">
             </div>
         </section>
 
@@ -501,12 +562,17 @@
             <p>Find important documents here, such as annual reports, application forms, and newsletters.</p>
         </section>
 
+        <!-- 5. Contact Section -->
         <section id="contact">
             <h2>Contact Us</h2>
             <p>We welcome your messages and memories. Feel free to reach out to us.</p>
             <address>
-                Email: <a href="mailto:info@balansirsfoundation.org">info@balansirsfoundation.org</a><br>
-                Address: [Foundation Address Placeholder]
+                Email: <a href="mailto:balansirevents@gmail.com">balansirevents@gmail.com</a><br>
+                Balan Sir Foundation, <br>
+                Carmel Alumni Association, <br>
+                Fr. Gilbert Memorial Jubilee Building, <br>
+                Carmel Polytechnic College Campus, <br>
+                Punnapra, Alappuzha-688004
             </address>
         </section>
 
