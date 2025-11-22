@@ -203,6 +203,7 @@
             border-radius: 0.5rem;
             aspect-ratio: 1 / 1;
             border: 4px solid var(--color-secondary);
+            cursor: pointer; /* Indicate it's clickable */
         }
 
         .photo-wrapper p {
@@ -331,13 +332,6 @@
             width: 1.25rem;
         }
 
-        .cta-note {
-            font-size: 0.875rem;
-            color: #9ca3af; /* text-gray-400 */
-            margin-top: 1rem;
-            font-style: italic;
-        }
-        
         /* Placeholder Section Headers */
         #gallery, #downloads, #contact {
             /* ADDED: Center content of these sections */
@@ -421,6 +415,81 @@
             font-size: 0.875rem;
         }
 
+        /* --- Modal (Lightbox) Styles - MODIFIED FOR ENLARGED VIEW --- */
+        .modal {
+            display: none; /* Hidden by default. JS sets this to 'flex' to show. */
+            position: fixed; 
+            z-index: 100; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.7); /* Reduced opacity for lighter feel */
+            
+            /* Center content using Flexbox */
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .modal-content {
+            margin: 0; /* Let flexbox handle centering */
+            display: block;
+            width: 90%;
+            max-width: 650px; /* Constrained size for 'enlarged' feel, not 'full screen' */
+            border-radius: 0.5rem;
+            border: 5px solid white; /* Frame the image to make it stand out */
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.5); /* Soft white glow */
+            /* Animation */
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @keyframes zoom {
+            from {transform: scale(0.1)} 
+            to {transform: scale(1)}
+        }
+
+        /* Caption of Modal Image */
+        .caption {
+            margin: 0;
+            display: block;
+            width: 90%;
+            max-width: 650px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            font-size: 1.125rem;
+        }
+
+        /* Close Button */
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            line-height: 1; 
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Responsive adjustments for modal on smaller screens */
+        @media only screen and (max-width: 700px){
+            .modal-content {
+                width: 100%;
+            }
+        }
+
     </style>
 </head>
 <body class="antialiased">
@@ -480,8 +549,9 @@
                 <div class="about-photo-card">
                     <div class="photo-wrapper">
                         <img 
+                            id="tribute-photo"
                             src="Photo1.jpeg" 
-                            alt="A photograph of Balan Sir" 
+                            alt="A photograph of Er. P Balan" 
                             onerror="this.onerror=null; this.src='https://placehold.co/400x400/374151/ffffff?text=Image+Unavailable';"
                         >
                         <p>
@@ -586,6 +656,14 @@
         </div>
     </footer>
 
+    <!-- --- IMAGE MODAL (LIGHTBOX) --- -->
+    <div id="imageModal" class="modal">
+        <span class="close-button">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption" class="caption"></div>
+    </div>
+
+
     <!-- JavaScript for Mobile Menu Toggle and Current Year -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -611,6 +689,37 @@
                     }
                 });
             });
+
+            // --- Modal Logic ---
+            const img = document.getElementById('tribute-photo');
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById("img01");
+            const captionText = document.getElementById("caption");
+            const closeModal = document.getElementsByClassName("close-button")[0];
+
+            // When the user clicks the image, open the modal 
+            img.onclick = function(){
+              // Use 'flex' instead of 'block' to enable centering via CSS flex properties
+              modal.style.display = "flex"; 
+              modalImg.src = this.src;
+              modalImg.alt = this.alt;
+              // Set caption using the image alt text and the quote below it
+              captionText.innerHTML = this.alt + " (" + this.parentElement.querySelector('p').textContent + ")";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            closeModal.onclick = function() { 
+              modal.style.display = "none";
+            }
+            
+            // When the user clicks anywhere outside of the image content, close the modal
+            modal.onclick = function(event) {
+                // If the click target is the modal itself (the dark background)
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+            // --- End Modal Logic ---
 
             // Set current year in footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
